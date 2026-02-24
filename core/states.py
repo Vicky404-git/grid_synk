@@ -1,15 +1,20 @@
+# core/states.py
+
 class EnergyState:
     SURPLUS = "SURPLUS"
     DEFICIT = "DEFICIT"
     PEAK = "PEAK"
+    CRITICAL = "CRITICAL"
     NORMAL = "NORMAL"
 
 
-def detect_state(solar, demand, peak_flag):
-    if peak_flag:
+def classify_state(stress_index):
+    if stress_index > 40:
+        return EnergyState.CRITICAL
+    elif stress_index > 20:
         return EnergyState.PEAK
-    if solar > demand:
-        return EnergyState.SURPLUS
-    if solar < demand:
+    elif stress_index > 0:
         return EnergyState.DEFICIT
+    elif stress_index < -10:
+        return EnergyState.SURPLUS
     return EnergyState.NORMAL
