@@ -1,0 +1,43 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+
+# Virtual environment
+grid_synk/
+.env/
+.envrc/
+.venv/
+
+# Streamlit
+.streamlit/
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Logs
+*.log
+
+# Data files (if large)
+data/*.csv
+data/*.xlsx
+data/*.json
+
+# Model files
+*.pkl
+*.joblib
+*.h5
+
+# Temporary files
+*.tmp
+*.bak
