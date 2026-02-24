@@ -1,10 +1,14 @@
-# core/decision_engine.py
+from core.logic import (
+    compute_stress_index,
+    compute_renewable_ratio,
+    classify_state,
+    TransitionTracker
+)
 
-from core.metrics import compute_stress_index, compute_renewable_ratio
-from core.states import classify_state
-from core.policy_engine import evaluate_actions
-from core.transition import TransitionTracker
-
+from core.policy import (
+    evaluate_actions,
+    explain_decision
+)
 
 class EnergyDecisionEngine:
 
@@ -26,10 +30,13 @@ class EnergyDecisionEngine:
             renewable_ratio
         )
 
+        explanation = explain_decision(state)
+
         return {
             "state": state,
             "stress_index": stress_index,
             "renewable_ratio": renewable_ratio,
             "transition": transition,
-            "ranked_actions": ranked_actions
+            "ranked_actions": ranked_actions,
+            "explanation": explanation
         }

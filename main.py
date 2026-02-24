@@ -2,7 +2,6 @@ import streamlit as st
 import matplotlib.pyplot as plt
 from simulation.sim import generate_data, forecast_next_hour
 from core.decision_engine import EnergyDecisionEngine
-
 st.set_page_config(layout="wide")
 
 st.title("⚡ Grid-Sync: Advanced AI Energy Coordination Engine")
