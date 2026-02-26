@@ -1,20 +1,18 @@
 /* ═══════════════════════════════════════════════════════
    GRID-SYNC  –  Main Application Logic
+   Chart.js is loaded via CDN in index.html
    ═══════════════════════════════════════════════════════ */
 
-import { Chart, registerables } from 'chart.js';
-Chart.register(...registerables);
-
 // ── DOM References ──
-const sidebar      = document.getElementById('sidebar');
-const hamburger    = document.getElementById('hamburger');
+const sidebar = document.getElementById('sidebar');
+const hamburger = document.getElementById('hamburger');
 const sidebarClose = document.getElementById('sidebarClose');
-const overlay      = document.getElementById('overlay');
-const themeToggle  = document.getElementById('themeToggle');
+const overlay = document.getElementById('overlay');
+const themeToggle = document.getElementById('themeToggle');
 const topThemeToggle = document.getElementById('topThemeToggle');
 const darkModeSwitch = document.getElementById('darkModeSwitch');
-const navItems     = document.querySelectorAll('.nav-item');
-const pages        = document.querySelectorAll('.page');
+const navItems = document.querySelectorAll('.nav-item');
+const pages = document.querySelectorAll('.page');
 
 // ── State ──
 let currentPage = 'overview';
@@ -172,7 +170,7 @@ function initAllCharts() {
     solarChartInstance = new Chart(solarCtx, {
       type: 'line',
       data: {
-        labels: ['6 AM','8 AM','10 AM','12 PM','2 PM','4 PM','6 PM'],
+        labels: ['6 AM', '8 AM', '10 AM', '12 PM', '2 PM', '4 PM', '6 PM'],
         datasets: [{
           label: 'Solar Production (kW)',
           data: [0.5, 2.1, 3.8, 4.8, 4.5, 3.2, 1.1],
@@ -196,10 +194,10 @@ function initAllCharts() {
     tradingChartInstance = new Chart(tradingCtx, {
       type: 'bar',
       data: {
-        labels: ['Jan','Feb','Mar','Apr','May','Jun'],
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
         datasets: [
-          { label: 'Bought (kWh)', data: [110,120,95,130,115,120], backgroundColor: 'rgba(0,114,255,.7)', borderRadius: 6 },
-          { label: 'Sold (kWh)', data: [60,85,90,75,95,85], backgroundColor: 'rgba(0,201,167,.7)', borderRadius: 6 },
+          { label: 'Bought (kWh)', data: [110, 120, 95, 130, 115, 120], backgroundColor: 'rgba(0,114,255,.7)', borderRadius: 6 },
+          { label: 'Sold (kWh)', data: [60, 85, 90, 75, 95, 85], backgroundColor: 'rgba(0,201,167,.7)', borderRadius: 6 },
         ]
       },
       options: baseChartOptions(c),
@@ -212,10 +210,10 @@ function initAllCharts() {
     analyticsChart1 = new Chart(a1, {
       type: 'line',
       data: {
-        labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [
-          { label: 'Solar (kWh)', data: [90,105,130,160,180,195,200,185,155,125,100,88], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,.08)', fill: true, tension: .4, borderWidth: 2.5, pointRadius: 3 },
-          { label: 'Demand (kWh)', data: [120,115,110,100,95,105,120,130,115,110,118,125], borderColor: '#0072ff', backgroundColor: 'rgba(0,114,255,.08)', fill: true, tension: .4, borderWidth: 2.5, pointRadius: 3 },
+          { label: 'Solar (kWh)', data: [90, 105, 130, 160, 180, 195, 200, 185, 155, 125, 100, 88], borderColor: '#f59e0b', backgroundColor: 'rgba(245,158,11,.08)', fill: true, tension: .4, borderWidth: 2.5, pointRadius: 3 },
+          { label: 'Demand (kWh)', data: [120, 115, 110, 100, 95, 105, 120, 130, 115, 110, 118, 125], borderColor: '#0072ff', backgroundColor: 'rgba(0,114,255,.08)', fill: true, tension: .4, borderWidth: 2.5, pointRadius: 3 },
         ]
       },
       options: baseChartOptions(c),
@@ -227,9 +225,9 @@ function initAllCharts() {
     analyticsChart2 = new Chart(a2, {
       type: 'bar',
       data: {
-        labels: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [{
-          label: 'Savings ($)', data: [22,28,35,42,48,52,55,50,40,32,25,20],
+          label: 'Savings ($)', data: [22, 28, 35, 42, 48, 52, 55, 50, 40, 32, 25, 20],
           backgroundColor: 'rgba(0,201,167,.7)', borderRadius: 6,
         }]
       },
@@ -242,10 +240,10 @@ function initAllCharts() {
     analyticsChart3 = new Chart(a3, {
       type: 'doughnut',
       data: {
-        labels: ['Solar','Battery','Government Grid'],
+        labels: ['Solar', 'Battery', 'Government Grid'],
         datasets: [{
           data: [58, 26, 16],
-          backgroundColor: ['rgba(245,158,11,.8)','rgba(0,201,167,.8)','rgba(127,0,255,.8)'],
+          backgroundColor: ['rgba(245,158,11,.8)', 'rgba(0,201,167,.8)', 'rgba(127,0,255,.8)'],
           borderWidth: 0,
           hoverOffset: 10,
         }]
@@ -265,10 +263,10 @@ function initAllCharts() {
     analyticsChart4 = new Chart(a4, {
       type: 'line',
       data: {
-        labels: ['Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
+        labels: ['Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
         datasets: [
-          { label: 'Predicted Demand', data: [110,100,95,105,120,130,115,110,118,125], borderColor: '#7c3aed', borderDash: [6, 4], tension: .4, borderWidth: 2.5, pointRadius: 3 },
-          { label: 'Predicted Solar', data: [130,160,180,195,200,185,155,125,100,88], borderColor: '#f59e0b', borderDash: [6, 4], tension: .4, borderWidth: 2.5, pointRadius: 3 },
+          { label: 'Predicted Demand', data: [110, 100, 95, 105, 120, 130, 115, 110, 118, 125], borderColor: '#7c3aed', borderDash: [6, 4], tension: .4, borderWidth: 2.5, pointRadius: 3 },
+          { label: 'Predicted Solar', data: [130, 160, 180, 195, 200, 185, 155, 125, 100, 88], borderColor: '#f59e0b', borderDash: [6, 4], tension: .4, borderWidth: 2.5, pointRadius: 3 },
         ]
       },
       options: baseChartOptions(c),
@@ -279,9 +277,9 @@ function initAllCharts() {
 function updateSolarChart(range) {
   if (!solarChartInstance) return;
   const datasets = {
-    daily: { labels: ['6 AM','8 AM','10 AM','12 PM','2 PM','4 PM','6 PM'], data: [0.5,2.1,3.8,4.8,4.5,3.2,1.1] },
-    weekly: { labels: ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'], data: [28,32,25,35,30,38,22] },
-    monthly: { labels: ['Jan','Feb','Mar','Apr','May','Jun'], data: [600,720,850,980,1050,1100] },
+    daily: { labels: ['6 AM', '8 AM', '10 AM', '12 PM', '2 PM', '4 PM', '6 PM'], data: [0.5, 2.1, 3.8, 4.8, 4.5, 3.2, 1.1] },
+    weekly: { labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], data: [28, 32, 25, 35, 30, 38, 22] },
+    monthly: { labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'], data: [600, 720, 850, 980, 1050, 1100] },
   };
   const d = datasets[range] || datasets.daily;
   solarChartInstance.data.labels = d.labels;
