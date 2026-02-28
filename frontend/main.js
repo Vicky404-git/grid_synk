@@ -131,6 +131,66 @@ document.querySelectorAll('.toggle-group').forEach(group => {
   });
 });
 
+// ======================================
+//  BACKEND CONNECT
+// ======================================
+
+async function fetchDecisionFromBackend() {
+  try {
+    const solar = 92;
+    const demand = 48;
+    const battery = 60;
+    const ev = 25;
+
+    const response = await fetch(
+      `http://127.0.0.1:8000/decision?solar=${solar}&demand=${demand}&battery=${battery}&ev=${ev}`
+    );
+
+    const data = await response.json();
+
+    console.log("AI Response:", data);
+
+    applyAIResults(data);
+
+  } catch (error) {
+    console.error("Backend connection failed:", error);
+  }
+}
+
+function applyAIResults(data) {
+
+  const badge = document.getElementById("gridBadge");
+  if (badge) {
+    badge.textContent = data.state;
+    
+    badge.classList.remove("badge-green", "badge-yellow", "badge-red");
+    if (data.state === "SURPLUS") badge.classList.add("badge-green");
+    else if (data.state === "DEFICIT") badge.classList.add("badge-red");
+    else badge.classList.add("badge-yellow");
+  }
+
+  const el = (id) => document.getElementById(id);
+
+  if (el('gridValue')) el('gridValue').textContent = data.state;
+
+  if (el('stressIndex')) el('stressIndex').textContent =
+    data.stress_index.toFixed(2);
+
+  if (el('renewableRatio')) el('renewableRatio').textContent =
+    data.renewable_ratio.toFixed(2);
+
+  const actionList = el('aiActions');
+  if (actionList) {
+    actionList.innerHTML = "";
+    data.ranked_actions.forEach(([action, score]) => {
+      const li = document.createElement("li");
+      li.textContent = `${action} → ${score.toFixed(2)}`;
+      actionList.appendChild(li);
+    });
+  }
+}
+
+
 // ═══════════════════════════════════════
 //  CHART.JS – INITIALIZATION
 // ═══════════════════════════════════════
@@ -348,7 +408,7 @@ function updateLiveData() {
   if (battPctEl) battPctEl.textContent = batteryPct + '%';
 
   // Grid status - randomize occasionally
-  const gridStatuses = ['Normal', 'Normal', 'Normal', 'High', 'Critical'];
+  
   const gridStatus = gridStatuses[Math.floor(Math.random() * gridStatuses.length)];
   const gridVal = el('gridValue');
   const gridBadge = el('gridBadge');
@@ -360,8 +420,7 @@ function updateLiveData() {
 }
 
 // Update every 5 seconds
-setInterval(updateLiveData, 5000);
-
+fetchDecisionFromBackend();
 // ═══════════════════════════════════════
 //  INIT
 // ═══════════════════════════════════════

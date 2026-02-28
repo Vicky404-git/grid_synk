@@ -30,8 +30,11 @@ def forecast_next_hour(df):
     next_hour = [[df["hour"].max() + 1]]
     predicted_demand = model.predict(next_hour)[0]
 
-    predicted_solar = df["solar"].iloc[-1]  # simple carry-forward
-
+    y_solar = df["solar"]
+    model_solar = LinearRegression()
+    model_solar.fit(X, y_solar)
+    predicted_solar = model_solar.predict(next_hour)[0]
+    
     peak_flag = predicted_demand > df["demand"].mean() + 10
 
     return predicted_solar, predicted_demand, peak_flag

@@ -45,6 +45,7 @@
           </svg>
           <span>Overview</span>
         </a>
+        
         <a href="#solar" class="nav-item" data-page="solar">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="4" />
@@ -514,6 +515,14 @@
                     kW</span></div>
                 <div class="ev-stat"><span class="ev-stat-label">Battery Level</span><span
                     class="ev-stat-val">64%</span></div>
+              </div>
+              <div class="card">
+                <h2 class="card-title">AI Grid Intelligence</h2>
+                <p><strong>Grid Stress Index:</strong> <span id="stressIndex">--</span></p>
+                <p><strong>Renewable Ratio:</strong> <span id="renewableRatio">--</span></p>
+                
+                <h3 style="margin-top:15px;">Recommended Actions</h3>
+                <ul id="aiActions"></ul>
               </div>
             </div>
           </div>
